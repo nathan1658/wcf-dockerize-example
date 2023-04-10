@@ -19,9 +19,21 @@ namespace wcf_dockerize_example
         [OperationContract]
         CompositeType GetDataUsingDataContract(CompositeType composite);
 
-        // TODO: Add your service operations here
+        [OperationContract(Name ="Test")]
+        [WebGet(UriTemplate = "Test", ResponseFormat = WebMessageFormat.Json)]
+        DemoObject Test();
+
+
     }
 
+    [DataContract]
+    public class DemoObject
+    {
+        [DataMember]
+        public string ServiceKey { get; set; }
+        [DataMember]
+        public string WebConfigEnv { get; set; }
+    }
 
     // Use a data contract as illustrated in the sample below to add composite types to service operations.
     [DataContract]

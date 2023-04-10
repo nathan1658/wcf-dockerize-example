@@ -29,5 +29,29 @@ namespace wcf_dockerize_example
             }
             return composite;
         }
+
+        public DemoObject Test()
+        {
+            // try to get environment variable DEMO_ENV
+            var env = Environment.GetEnvironmentVariable("PATH");
+            if (env == null)
+            {
+                env = "undefined";
+            }
+
+
+            // try to get service key from web.config
+            var serviceKey = System.Configuration.ConfigurationManager.AppSettings["ServiceKey"];
+            if (serviceKey == null)
+            {
+                serviceKey = "undefined";
+            }
+
+            return new DemoObject
+            {
+                ServiceKey = serviceKey,
+                WebConfigEnv = env
+            };
+        }
     }
 }
